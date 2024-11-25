@@ -15,7 +15,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Build the Angular project for production
-RUN ng build --prod
+RUN ng build --configuration production
 
 # Use a smaller web server image to serve the built Angular app
 FROM nginx:alpine
