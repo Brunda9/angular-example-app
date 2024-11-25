@@ -9,7 +9,7 @@ COPY package*.json ./
 
 # Install the Angular CLI globally and install app dependencies
 RUN npm install -g @angular/cli
-RUN npm install stylelint-config-prettier@latest
+RUN npm install --legacy-peer-deps
 
 # Copy the rest of the application code
 COPY . .
