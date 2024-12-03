@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: angular-app
-          image: gbsartifactory.edst.ibm.com/test_docker/angular-example:${BUILD_NUMBER}  # Replace with your Docker image
+          image: gbsartifactory.edst.ibm.com/test_docker/angular-example:45  # Replace with your Docker image
           ports:
           - containerPort: 80
       imagePullSecrets:
