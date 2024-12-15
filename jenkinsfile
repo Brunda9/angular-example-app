@@ -22,7 +22,7 @@ pipeline {
             steps {
                sh '''                                  
 						 
-							            git clone https://github.com/Brunda9/angular-example-app/
+							            git clone https://github.com/Brunda9/angular-example-app.git
                           git checkout origin/master -- angular-example-app/Dockerfile
                 '''
             }
