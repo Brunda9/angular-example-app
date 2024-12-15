@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        node {
+            label 'DockerIO-4'
+        }
+    
+    }
+    environment{
+        Git_token = credentials'Brunda_github_new_token'
+    }
+    
+    tools {
+        nodejs 'Nodejs'
+    }
+    stages {
+        stage('Workspace cleanup') {
+            steps {
+                cleanWs()
+            }
+	}
+        stage('clone') {
+            steps {
+               sh '''                                  
+						 
+							            git clone https://github.com/Brunda9/angular-example-app/
+                          git checkout origin/master -- angular-example-app/Dockerfile
+                '''
+            }
+        }
+    
