@@ -3,29 +3,50 @@ pipeline {
         node {
             label 'DockerIO-4'
         }
-    
     }
-    environment{
-        Git_token = credentials'Brunda_github_new_token'
+
+    environment {
+        Git_token = credentials('Brunda_github_new_token')  // The token is already in environment for usage if needed
     }
-    
+
     tools {
         nodejs 'Nodejs'
     }
+
     stages {
         stage('Workspace cleanup') {
             steps {
                 cleanWs()
             }
-	}
-        stage('clone') {
+        }
+
+        stage('Clone Repository') {
             steps {
-               sh '''                                  
-						 
-							            git clone https://github.com/Brunda9/angular-example-app.git
-                          git checkout origin/master -- angular-example-app/Dockerfile
-                '''
+                script {
+                    // Using credentials to authenticate with GitHub and clone the repository
+                    withCredentials([usernamePassword(credentialsId: 'Brunda_github_new_token')]) {
+
+                        // Clone the repository into a subdirectory named 'angular-example-app'
+                        sh 'git clone https://$GIT_USERNAME:$GIT_PASSWORD@github.com/Brunda9/angular-example-app.git'
+                    }
+                }
             }
         }
+
+        stage('Checkout Specific File') {
+            steps {
+                script {
+                    // Use the 'dir' block to navigate into the cloned repository
+                    dir('angular-example-app') {
+                        // Checkout only the specific file (replace with the correct file path)
+                        sh 'git checkout origin/master -- Dockerfile'
+
+                        // Optionally, display the file's contents
+                        sh 'cat Dockerfile'
+                    }
+                }
+            }
+        }
+    }
 }
-}
+
