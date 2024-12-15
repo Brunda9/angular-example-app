@@ -18,17 +18,7 @@ pipeline {
 
         stage('Clone') {
             steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/master']],
-                    userRemoteConfigs: [
-                        [url: 'https://github.com/Brunda9/angular-example-app', credentialsId: 'Brunda_github_new_token']
-                    ],
-                    extensions: [
-                        // Enable sparse checkout
-                        [$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: 'Dockerfile']]]
-                    ]
-                ])
+                checkout scmGit(branches: [[name: '*/master']], browser: github('https://github.com/Brunda9/angular-example-app'), extensions: [], userRemoteConfigs: [[credentialsId: 'Brunda_github_new_token', url: 'https://github.com/Brunda9/angular-example-app']])
             }
         }
     }
