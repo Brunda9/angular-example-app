@@ -18,32 +18,17 @@ pipeline {
 
         stage('Clone') {
             steps {
-                script {
-                    try {
-                        checkout scmGit(branches: [[name: '*/master']], browser: github('https://github.com/Brunda9/angular-example-app.git'), extensions: [], userRemoteConfigs: [[credentialsId: 'Brunda_github_new_token']])
-                    } catch (Exception e) {
-                        echo "Clone failed: ${e.getMessage()}"
-                        currentBuild.result = 'FAILURE'
-                        exit 1  // Stop the pipeline
-                    }
-                }
-            }
-        }
-
-        stage('Build') {
-            steps {
-                script {
-                    try {
-                        sh '''
-                            export PATH="/opt/tools/node-v18.14.2/bin:$PATH"
-                            npm install
-                        '''
-                    } catch (Exception e) {
-                        echo "Build failed: ${e.getMessage()}"
-                        currentBuild.result = 'FAILURE'
-                        exit 1  // Stop the pipeline
-                    }
-                }
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/master']],
+                    userRemoteConfigs: [
+                        [url: 'https://github.com/Brunda9/angular-example-app', credentialsId: 'Brunda_github_new_token']
+                    ],
+                    extensions: [
+                        // Enable sparse checkout
+                        [$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: 'Dockerfile']]]
+                    ]
+                ])
             }
         }
     }
