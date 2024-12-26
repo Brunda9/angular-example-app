@@ -32,5 +32,11 @@ pipeline {
             }
         }
     }
+post {
+    always {
+      script {
+      manager.addShortText("${BRANCH}")
+      }
+    }
 }
 
