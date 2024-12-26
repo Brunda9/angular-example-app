@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        checkout scmGit(branches: [[name: '*/master']], browser: github('https://github.com/Brunda9/example'), extensions: [], userRemoteConfigs: [[credentialsId: 'Brunda_github_new_token']])
+                        checkout scmGit(branches: [[name: '*/master']], browser: github('https://github.com/Brunda9/angular-example-app.git'), extensions: [], userRemoteConfigs: [[credentialsId: 'Brunda_github_new_token']])
                     } catch (Exception e) {
                         echo "Clone failed: ${e.getMessage()}"
                         currentBuild.result = 'FAILURE'
