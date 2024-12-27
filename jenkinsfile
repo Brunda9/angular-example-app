@@ -3,9 +3,9 @@ pipeline {
         label 'linux'
     }
 
-    tools {
-        nodejs 'Nodejs'
-    }
+    //tools {
+    //    nodejs 'Nodejs'
+    //}
 
     environment {
         BRANCH = 'master'  // Default branch (this can be dynamically set as needed)
