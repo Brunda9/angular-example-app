@@ -24,7 +24,7 @@ pipeline {
                     $class: 'GitSCM',
                     branches: [[name: "*/${BRANCH}"]],  // Dynamically use the BRANCH variable
                     userRemoteConfigs: [
-                        [url: 'https://github.com/Brunda9/angular-example-app', credentialsId: 'Brunda_github_new_token']
+                        [url: 'https://github.com/Brunda9/angular-example-app', credentialsId: 'MSIL_EV_TEST1']
                     ],
                     extensions: [
                         // Enable sparse checkout (for specific files/folders)
