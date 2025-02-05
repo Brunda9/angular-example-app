@@ -23,34 +23,34 @@ pipeline {
                     branches: [[name: "*/${BRANCH}"]],  // Dynamically use the BRANCH variable
                     userRemoteConfigs: [
                         [url: 'https://github.com/Brunda9/angular-example-app', credentialsId: 'test_git']
-                    ],
-                    extensions: [
-                        // Enable sparse checkout (for specific files/folders)
-                        [$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: 'Dockerfile']]]
                     ]
+                    //extensions: [
+                        // Enable sparse checkout (for specific files/folders)
+                       // [$class: 'SparseCheckoutPaths', sparseCheckoutPaths: [[path: 'Dockerfile']]]
+                    //]
                 ])
             }
         }
     }
 
-    post {
-        always {
-            script {
+    //post {
+        //always {
+            //script {
                 // Get the Git diff between the latest commit and the previous commit
                 def gitDiff = sh(script: 'git diff HEAD^ HEAD', returnStdout: true).trim()
                 
                 // Print the Git diff to the Jenkins console log
-                echo "Git Diff for the latest commit:"
-                echo "${gitDiff}"
+                //echo "Git Diff for the latest commit:"
+                //echo "${gitDiff}"
 
                 // Optionally, write the Git diff to a file
-                writeFile(file: 'git_diff.txt', text: gitDiff)
+               // writeFile(file: 'git_diff.txt', text: gitDiff)
 
                 // Add short text (branch name) to the Jenkins UI, as previously requested
-                manager.addShortText("${BRANCH}")
-            }
-        }
-    }
+                //manager.addShortText("${BRANCH}")
+            //}
+        //}
+    //}
 }
 
 
