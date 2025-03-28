@@ -18,7 +18,7 @@ pipeline {
                     $class: 'GitSCM',
                     branches: [[name: "*/${BRANCH}"]],  // Dynamically use the BRANCH variable
                     userRemoteConfigs: [
-                        [url: 'https://github.com/Brunda9/angular-example-app', credentialsId: 'test_git']
+                        [url: 'https://Brunda9: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@github.com/Brunda9/angular-example-app']
                     ]
                 ])
             }
